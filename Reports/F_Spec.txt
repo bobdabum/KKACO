@@ -1,0 +1,77 @@
+
+
+
+1.Product name
+
+
+
+letter.ac
+
+recommendation.ac
+
+
+2. Problem statement
+
+
+Can a graduate student find a better experience to find recommendation rather than asking faculty members for letters three times? Can we save the faculty’s time in writing multiple letters?
+
+
+
+3. Product objectives
+
+
+- Create seamless experience of creating, delivering, storing LOR.
+
+- Relieve the student’s difficulties of asking professors to write several times 
+
+
+
+4. SIX Functional requirements
+
+<What the system shall be able to do or allow users to do>
+
+
+•Users shall be able to access their own stored letters and send LOR to receiver’s email (The user shall be able to search either all of the initial set of databases or select a subset from it)
+
+
+•LOR writer shall be able to choose either Option A (duration: 6month or 1 year) or Option B (maximum number of sending)
+
+
+•LOR writer shall be able to choose either Option C (Confidential) or Option D (Open)
+
+
+•Institutes / Business owners shall be able to request LOR on the website
+
+
+•The system shall provide appropriate viewers for the user to read documents in the document store
+
+•
+
+
+
+5. FOUR Nonfunctional requirements
+
+•The system shall run on Windows and Linux servers
+
+
+•Performance Requirement: System shall process a minimum of (how many??) transactions per second. 
+
+
+•Security Requirement: All system data must be backed up every 24 hours and the backup copies stored in a secure location which is not in the same building as the system
+
+
+•The access permissions for system data may only be changed by the system’s data administrator
+
+•
+
+
+
+
+
+Use case diagram with 6 use cases
+
+Use case descriptions of your use cases
+
+
+https://github.com/
+
