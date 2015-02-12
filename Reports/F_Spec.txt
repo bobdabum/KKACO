@@ -62,8 +62,9 @@ Can a graduate student find a better experience to find recommendation rather th
 
 •The access permissions for system data may only be changed by the system’s data administrator
 
+• Crossbrowser compatible
+• Close to instantaneous
 •
-
 
 
 
