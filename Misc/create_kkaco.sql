@@ -129,9 +129,11 @@ CREATE TABLE `user` (
   `user_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'User ID Number',
   `fname` varchar(50) NOT NULL COMMENT 'First Name',
   `lname` varchar(50) NOT NULL,
+  `password` nchar(102) NOT NULL,
   `email` varchar(255) NOT NULL,
   `createdon` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`user_id`)
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `ix_email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
