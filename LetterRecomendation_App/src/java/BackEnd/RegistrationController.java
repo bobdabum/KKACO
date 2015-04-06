@@ -5,6 +5,7 @@
 package BackEnd;
 
 import DataAccessLayer.UserInfo;
+import DataAccessLayer.UserInterface;
 import JavaBeans.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,7 +22,8 @@ public class RegistrationController extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
         try{
-            User user = UserInfo.createUser(request.getParameter("email"),
+            UserInterface userInt = new UserInfo();
+            User user = userInt.createUser(request.getParameter("email"),
                     request.getParameter("pw"),
                     request.getParameter("fName"),
                     request.getParameter("lName"));

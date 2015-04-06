@@ -21,7 +21,8 @@ public class LoginController extends HttpServlet{
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
         try{
-            User user = UserInfo.findUserByPW(request.getParameter("email"),
+            UserInterface userInt = new UserInfo();
+            User user = userInt.findUserByPW(request.getParameter("email"),
                     request.getParameter("pw"));
             request.setAttribute("user", user);
             this.getServletContext().getRequestDispatcher("/userProfile.jsp")

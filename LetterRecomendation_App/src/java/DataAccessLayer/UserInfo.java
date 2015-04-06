@@ -11,8 +11,8 @@ import java.sql.*;
  *
  * @author My Pc
  */
-public class UserInfo{
-    public static User findUserByID(int studentID) throws Exception {
+public class UserInfo implements UserInterface{
+    public User findUserByID(int studentID) throws Exception {
         Connection conn = DataBaseConn.getConnection();
         String query = "SELECT fname, lname, email"+
                 " FROM user"+
@@ -37,7 +37,7 @@ public class UserInfo{
             throw e;
         }
     }
-    public static User findUserByPW(String email, String pw) throws Exception {
+    public User findUserByPW(String email, String pw) throws Exception {
         Connection conn = DataBaseConn.getConnection();
         String query = "SELECT fname, lname, email, password, user_id"+
                 " FROM user"+
@@ -67,7 +67,7 @@ public class UserInfo{
             throw e;
         }
     }
-    public static User createUser(String email, String pw, String fName, String lName) throws Exception{
+    public User createUser(String email, String pw, String fName, String lName) throws Exception{
         Connection conn = DataBaseConn.getConnection();
         String query = "INSERT INTO USER(fname, lname, email, password)"+
                 " VALUES(?,?,?,?)";
