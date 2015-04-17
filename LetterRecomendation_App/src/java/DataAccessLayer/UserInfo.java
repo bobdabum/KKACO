@@ -4,8 +4,12 @@
  */
 package DataAccessLayer;
 
+import Interface.UserInterface;
+import JavaBeans.Letter;
 import JavaBeans.User;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -94,5 +98,50 @@ public class UserInfo implements UserInterface{
         catch(Exception e){
             throw e;
         }
+    }
+
+    @Override
+    public User updateUserPassword(String pw, int userID) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public User updateProfileInfo(String userID, String fName, String lName) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<Letter> findUserLetterReceived(int userID) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<Letter> findUserLetterRequested(int userID) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void acceptLetter(boolean accepted, int letterID, int userID) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void requestLetter(int writer_id, int recomendee_id, GregorianCalendar deadline, GregorianCalendar validto, boolean isPrivate) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void submitLetterText(int letterID, String text) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void submitLetterFile(int letterID, String url) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String[] getLetter(int letterID) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
