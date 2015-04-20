@@ -5,7 +5,7 @@
 package BackEnd;
 
 import DataAccessLayer.UserInfo;
-import Interface.UserInterface;
+import Interfaces.UserInterface;
 import JavaBeans.User;
 import java.io.IOException;
 import java.io.PrintWriter;

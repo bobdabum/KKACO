@@ -4,7 +4,7 @@
  */
 package BackEnd;
 
-import Interface.UserInterface;
+import Interfaces.UserInterface;
 import DataAccessLayer.*;
 import JavaBeans.*;
 import java.io.IOException;
