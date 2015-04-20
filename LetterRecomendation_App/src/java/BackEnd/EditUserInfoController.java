@@ -37,7 +37,7 @@ public class EditUserInfoController extends HttpServlet {
         } catch (Exception e) {
             PrintWriter out = response.getWriter();
             out.println("<script type=\"text/javascript\">");
-            out.println("alert('" + e.getMessage() + "');"); // out.println("alert('Login failed. Please try again.');");
+            out.println("alert('User info edit failed. Please try again.');"); // out.println("alert('Login failed. Please try again.');");
             out.println("location='index.jsp';");
             out.println("</script>");
         }
