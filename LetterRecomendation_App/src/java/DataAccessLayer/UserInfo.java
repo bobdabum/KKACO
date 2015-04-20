@@ -9,6 +9,7 @@ import JavaBeans.Letter;
 import JavaBeans.User;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 /**
@@ -142,6 +143,11 @@ public class UserInfo implements UserInterface{
 
     @Override
     public String[] getLetter(int letterID) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public User requestLetter(int parseInt, int parseInt0, Calendar cal, String parameter, String parameter0) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

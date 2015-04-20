@@ -31,4 +31,6 @@ public interface UserInterface {
     public String[] getLetter(int letterID) throws Exception;
     
     //Institute Methods
+
+    public User requestLetter(int parseInt, int parseInt0, Calendar cal, String parameter, String parameter0);
 } 

@@ -36,7 +36,7 @@ public class RequestLetterController extends HttpServlet {
 
             DateFormat df = new SimpleDateFormat("dd MM yyyy");
             Date date = df.parse(request.getParameter("deadline"));
-            Calendar cal = new GregorianCalendar();
+            GregorianCalendar cal = new GregorianCalendar();
             cal.setTime(date);
 
             User user = userInt.requestLetter(Integer.parseInt(request.getParameter("writer_id")), 
