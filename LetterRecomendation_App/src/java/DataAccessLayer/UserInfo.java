@@ -4,18 +4,16 @@
  */
 package DataAccessLayer;
 
-import Interface.UserInterface;
-import JavaBeans.Letter;
+import Interfaces.UserInterface;
 import JavaBeans.User;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
 
 /**
  *
  * @author My Pc
  */
 public class UserInfo implements UserInterface{
+    @Override
     public User findUserByID(int studentID) throws Exception {
         Connection conn = DataBaseConn.getConnection();
         String query = "SELECT fname, lname, email"+
@@ -41,6 +39,7 @@ public class UserInfo implements UserInterface{
             throw e;
         }
     }
+    @Override
     public User findUserByPW(String email, String pw) throws Exception {
         Connection conn = DataBaseConn.getConnection();
         String query = "SELECT fname, lname, email, password, user_id"+
@@ -71,6 +70,7 @@ public class UserInfo implements UserInterface{
             throw e;
         }
     }
+    @Override
     public User createUser(String email, String pw, String fName, String lName) throws Exception{
         Connection conn = DataBaseConn.getConnection();
         String query = "INSERT INTO USER(fname, lname, email, password)"+
@@ -89,6 +89,7 @@ public class UserInfo implements UserInterface{
                 user.setEmail(email);
                 user.setfName(fName);
                 user.setlName(lName);
+                user.setUserid((int)rs.getLong(1));
                 return user;
             }
             else{
@@ -99,49 +100,41 @@ public class UserInfo implements UserInterface{
             throw e;
         }
     }
-
     @Override
-    public User updateUserPassword(String pw, int userID) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void updateUserPassword(String pw, int userID) throws Exception {
+        Connection conn = DataBaseConn.getConnection();
+        String query = "UPDATE USER"+
+                " SET password = ?"+
+                " WHERE user_id = ?";
+        PreparedStatement ps = conn.prepareStatement(query);
+        try{
+            ps.setString(1, PasswordHash.createHash(pw));
+            ps.setInt(2, userID);
+            ps.executeUpdate();
+        }
+        catch(Exception e){
+            throw e;
+        }
     }
 
     @Override
-    public User updateProfileInfo(String userID, String fName, String lName) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public ArrayList<Letter> findUserLetterReceived(int userID) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public ArrayList<Letter> findUserLetterRequested(int userID) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void acceptLetter(boolean accepted, int letterID, int userID) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void requestLetter(int writer_id, int recomendee_id, GregorianCalendar deadline, GregorianCalendar validto, boolean isPrivate) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void submitLetterText(int letterID, String text) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void submitLetterFile(int letterID, String url) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String[] getLetter(int letterID) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void updateProfileInfo(int userID, String fName, String lName, String email) throws Exception {
+        Connection conn = DataBaseConn.getConnection();
+        String query = "UPDATE USER"+
+                " SET fname = ?,"+
+                " lname = ?,"+
+                " email = ?"+
+                " WHERE user_id = ?";
+        PreparedStatement ps = conn.prepareStatement(query);
+        try{
+            ps.setString(1, fName);
+            ps.setString(2, lName);
+            ps.setString(3, email);
+            ps.setInt(4, userID);
+            ps.executeUpdate();
+        }
+        catch(Exception e){
+            throw e;
+        }
     }
 }
