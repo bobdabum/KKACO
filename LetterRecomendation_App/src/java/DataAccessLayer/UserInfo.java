@@ -101,7 +101,7 @@ public class UserInfo implements UserInterface{
         }
     }
     @Override
-    public void updateUserPassword(String pw, int userID) throws Exception {
+    public User updateUserPassword(String pw, int userID) throws Exception {
         Connection conn = DataBaseConn.getConnection();
         String query = "UPDATE USER"+
                 " SET password = ?"+
@@ -111,6 +111,7 @@ public class UserInfo implements UserInterface{
             ps.setString(1, PasswordHash.createHash(pw));
             ps.setInt(2, userID);
             ps.executeUpdate();
+            return null;
         }
         catch(Exception e){
             throw e;
@@ -118,20 +119,23 @@ public class UserInfo implements UserInterface{
     }
 
     @Override
-    public void updateProfileInfo(int userID, String fName, String lName, String email) throws Exception {
+    public User updateProfileInfo(int userID, String fName, String lName) throws Exception {
         Connection conn = DataBaseConn.getConnection();
         String query = "UPDATE USER"+
                 " SET fname = ?,"+
                 " lname = ?,"+
-                " email = ?"+
                 " WHERE user_id = ?";
         PreparedStatement ps = conn.prepareStatement(query);
         try{
             ps.setString(1, fName);
             ps.setString(2, lName);
-            ps.setString(3, email);
-            ps.setInt(4, userID);
+            ps.setInt(3, userID);
             ps.executeUpdate();
+            User user = new User();
+            user.setUserid(userID);
+            user.setfName(fName);
+            user.setlName(lName);
+            return user;
         }
         catch(Exception e){
             throw e;

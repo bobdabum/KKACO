@@ -15,6 +15,6 @@ public interface UserInterface {
     public User findUserByID(int userID) throws Exception;
     public User findUserByPW(String email, String pw) throws Exception;
     public User createUser(String email, String pw, String fName, String lName) throws Exception;
-    public void updateUserPassword(String pw, int userID) throws Exception;
-    public void updateProfileInfo(int userID, String fName, String lName, String email) throws Exception;
+    public User updateUserPassword(String pw, int userID) throws Exception;
+    public User updateProfileInfo(int userID, String fName, String lName) throws Exception;
 } 

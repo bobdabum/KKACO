@@ -17,21 +17,24 @@ import javax.servlet.http.*;
  *
  * @author My Pc
  */
-@WebServlet(name="LoginController1", urlPatterns={"/login"})
-public class LoginController extends HttpServlet{
+@WebServlet(name = "LoginController1", urlPatterns = {"/login"})
+public class LoginController extends HttpServlet {
+
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
-        try{
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        try {
             UserInterface userInt = new UserInfo();
             User user = userInt.findUserByPW(request.getParameter("email"),
                     request.getParameter("pw"));
             request.setAttribute("user", user);
             this.getServletContext().getRequestDispatcher("/userProfile.jsp")
                     .forward(request, response);
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             PrintWriter out = response.getWriter();
-            out.println("Error! "+e.getMessage());
+            out.println("<script type=\"text/javascript\">");
+            out.println("alert('" + e.getMessage() + "');"); // out.println("alert('Login failed. Please try again.');");
+            out.println("location='index.jsp';");
+            out.println("</script>");
         }
     }
 }
