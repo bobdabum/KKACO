@@ -20,17 +20,5 @@
             <input type="text" name="pw" /><br/>
             <input type="submit" value="OK" />
         </form>
-        <p>CREATE NEW ACCOUNT</p>
-        <form name="Registration Form" action="RegistrationController" method ="post">
-            Enter your email:
-            <input type="text" name="email" /><br/>
-            Enter your first name:
-            <input type="text" name="fName" /><br/>
-            Enter your last name:
-            <input type="text" name="lName" /><br/>
-            Enter your password:
-            <input type="text" name="pw" /><br/>
-            <input type="submit" value="OK" />
-        </form>
     </body>
 </html>
