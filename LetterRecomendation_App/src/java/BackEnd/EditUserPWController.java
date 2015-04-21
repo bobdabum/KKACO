@@ -7,7 +7,6 @@ package BackEnd;
 
 import DataAccessLayer.UserInfo;
 import Interfaces.UserInterface;
-import JavaBeans.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -27,7 +26,7 @@ public class EditUserPWController extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try {
             UserInterface userInt = new UserInfo();
-            User user = userInt.updateUserPassword(request.getParameter("pw"), Integer.parseInt(request.getParameter("userID")));
+            userInt.updateUserPassword(request.getParameter("pw"), Integer.parseInt(request.getParameter("userID")));
 
             this.getServletContext().getRequestDispatcher("/userProfile.jsp")
                     .forward(request, response);

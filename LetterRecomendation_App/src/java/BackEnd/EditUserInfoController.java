@@ -11,6 +11,7 @@ import JavaBeans.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Hien
  */
-//@WebServlet(name = "EditUserInfoController", urlPatterns = {"/EditUserInfoController"})
+//@WebServlet(name = "EditUserInfoController", urlPatterns = {"/UpdateFName","/UpdateLName","UpdateEmail"})
 public class EditUserInfoController extends HttpServlet {
 
     @Override
@@ -28,7 +29,7 @@ public class EditUserInfoController extends HttpServlet {
             UserInterface userInt = new UserInfo();
             User user = userInt.updateProfileInfo(Integer.parseInt(request.getParameter("userID")),
                     request.getParameter("fname"),
-                    request.getParameter("lName"));
+                    request.getParameter("lname"));
 
             request.setAttribute("user", user);
             this.getServletContext().getRequestDispatcher("/userProfile.jsp")

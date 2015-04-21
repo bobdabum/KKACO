@@ -5,30 +5,24 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Profile Page</title>
-		 <script  src="jquery-editInPlace-v2.2.1/spec/support/jquery-1.4.2.js"></script>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<t:wrapperLoggedIn title="User Profile">
+    <div class ='jumbotron' style="padding-top: 0; padding-bottom: 0">
+        <script  src="jquery-editInPlace-v2.2.1/spec/support/jquery-1.4.2.js"></script>
         <script  src="jquery-editInPlace-v2.2.1/spec/support/jquery-ui.js"></script>
         <script  src="jquery-editInPlace-v2.2.1/lib/jquery.editinplace.js"></script>
         <script  src="EditInPlace.js"></script>
-    </head>
-    <body>
-        
-        
-		 <h1>User Profile</h1>
-			<p>You may edit your information at any time.</p>
-			User Name: 
-            <p id="editme1">
-              User Name: ${user.fName} ${user.lName}
+        <div class="container" style="background-color:rgba(0,0,0,.6); height: 100%">
+            <h1>User Profile:</h1>
+            <p>To change your info, click on the field you wish to change.</p>
+            Name:
+            <p style="color:black">
+                <span id="fNameEdit">${user.fName}</span> <span id="lNameEdit">${user.lName}</span>
             </p>
-			
-			Email:
-			<p id="editme2">
-               Email: ${user.email}
+            Email:
+            <p id="emailEdit" style="color:black">
+                ${user.email}
             </p>
-        
-    </body>
-</html>
+        </div>
+    </div>
+</t:wrapperLoggedIn>

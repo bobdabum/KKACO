@@ -26,6 +26,8 @@ public class LoginController extends HttpServlet {
             UserInterface userInt = new UserInfo();
             User user = userInt.findUserByPW(request.getParameter("email"),
                     request.getParameter("pw"));
+            HttpSession session = request.getSession();
+            session.setAttribute("user_id", user.getUserid());
             request.setAttribute("user", user);
             this.getServletContext().getRequestDispatcher("/userProfile.jsp")
                     .forward(request, response);
