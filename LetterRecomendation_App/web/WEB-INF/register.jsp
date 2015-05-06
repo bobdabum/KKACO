@@ -10,8 +10,9 @@
     <div class="jumbotron">
         <div class='container'>
             <h2>Register New Account</h2>
-            <form name="Registration Form" action="RegistrationController" method ="post">
+            <form name="Registration Form" action="user_profile" method ="post">
                 <div class="form-group">
+                    <input type="hidden" name="action" value="register" />
                     <input type="email" class="form-control" placeholder="Email" name="email" />
                     <input type="text" class="form-control" placeholder="First Name" name="fName" />
                     <input type="text" class="form-control" placeholder="Last Name" name="lName" />

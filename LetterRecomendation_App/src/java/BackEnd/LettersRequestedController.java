@@ -5,15 +5,13 @@
  */
 package BackEnd;
 
-import DataAccessLayer.LetterInfo;
-import DataAccessLayer.UserInfo;
+import Enums.Params;
+import DataAccessLayer.*;
 import Interfaces.*;
-import JavaBeans.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.servlet.ServletException;
@@ -26,13 +24,21 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Hien
  */
-@WebServlet(name = "RequestLetterController", urlPatterns = {"/RequestLetterController"})
-public class RequestLetterController extends HttpServlet {
-
+@WebServlet(name = "LettersRequestedController", urlPatterns = {"/letters_requested"})
+public class LettersRequestedController extends HttpServlet {
+    @Override
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        try{
+            int userID = (Integer) request.getSession().getAttribute(Params.USER_ID);
+        }
+        catch(Exception e){
+            
+        }
+    }
+    
      @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        try {
-             
+        try {             
             LetterInterface letterInt = new LetterInfo();
 
             DateFormat df = new SimpleDateFormat("dd MM yyyy");

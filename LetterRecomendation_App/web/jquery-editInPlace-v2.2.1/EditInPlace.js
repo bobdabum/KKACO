@@ -23,7 +23,7 @@ $(document).ready(function(){
     // The most basic form of using the inPlaceEditor
     $("#fNameEdit").editInPlace({
         callback: function(unused, enteredText) { return enteredText; },
-        url: 'http://localhost:9999/LetterRecomendation_App/web/userProfile.jsp',
+        url: '$/user_profile',
         show_buttons: true,
         style:'color:black'
     });

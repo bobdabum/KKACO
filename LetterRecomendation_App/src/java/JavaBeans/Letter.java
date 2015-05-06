@@ -3,6 +3,8 @@
  * and open the template in the editor.
  */
 package JavaBeans;
+import Enums.LetterType;
+import Enums.LetterStatus;
 import java.util.GregorianCalendar;
 
 /**

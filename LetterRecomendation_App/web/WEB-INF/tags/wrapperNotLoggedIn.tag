@@ -3,7 +3,9 @@
     Created on : Apr 20, 2015, 12:48:52 AM
     Author     : My Pc
 --%>
-    
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>    
 <%@tag description="Wrapper for nonloggedin pages" pageEncoding="UTF-8"%>
 <%@attribute name="title"%>
 <html>
@@ -24,6 +26,8 @@
           <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
+        <c:set var="url">${pageContext.request.requestURL}</c:set>
+        <base href="${fn:substring(url, 0, fn:length(url) - fn:length(pageContext.request.requestURI))}${pageContext.request.contextPath}/" />
     </head>
         
     <body>
@@ -39,12 +43,25 @@
                     <a class="navbar-brand" href="index.jsp">Recommend.us</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
-                    <form class="navbar-form navbar-right" name="Login Input Form" action="LoginController" method ="post">
+                    <ul class='nav navbar-nav'>
+                        <li <c:if test="${title == 'Registration'}">class ='active'</c:if>>
+                        <a href="register">Registration
+                            <c:if test="${title == 'Registration'}"><span class="sr-only">(current)</span></c:if>
+                        </a>
+                        </li>
+                        <li <c:if test="${title == 'About Us'}">class ='active'</c:if>>
+                        <a href="about"/>About Us
+                        <c:if test="${title == 'Letters Requested'}"><span class="sr-only">(current)</span></c:if>
+                        </a>
+                        </li>
+                    </ul>
+                    <form class="navbar-form navbar-right" name="Login Input Form" action="user_profile" method ="post">
+                        <input type="hidden" name="<%=Enums.Params.ACTION%>" value="login" />
                         <div class="form-group">
-                            <input type="text" placeholder="Email" name="email"  class="form-control">
+                            <input type="text" placeholder="Email" name="<%=Enums.Params.EMAIL%>"  class="form-control">
                         </div>
                         <div class="form-group">
-                            <input type="password" placeholder="Password" name="pw" class="form-control">
+                            <input type="password" placeholder="Password" name="<%=Enums.Params.PASSWORD%>" class="form-control">
                         </div>
                         <button type="submit" class="btn btn-success">Sign in</button>
                     </form>
