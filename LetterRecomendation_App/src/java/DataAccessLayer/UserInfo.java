@@ -4,6 +4,10 @@
  */
 package DataAccessLayer;
 
+<<<<<<< HEAD
+=======
+import Interfaces.UserInterface;
+>>>>>>> master
 import JavaBeans.User;
 import java.sql.*;
 
@@ -12,6 +16,10 @@ import java.sql.*;
  * @author My Pc
  */
 public class UserInfo implements UserInterface{
+<<<<<<< HEAD
+=======
+    @Override
+>>>>>>> master
     public User findUserByID(int studentID) throws Exception {
         Connection conn = DataBaseConn.getConnection();
         String query = "SELECT fname, lname, email"+
@@ -37,6 +45,10 @@ public class UserInfo implements UserInterface{
             throw e;
         }
     }
+<<<<<<< HEAD
+=======
+    @Override
+>>>>>>> master
     public User findUserByPW(String email, String pw) throws Exception {
         Connection conn = DataBaseConn.getConnection();
         String query = "SELECT fname, lname, email, password, user_id"+
@@ -67,6 +79,10 @@ public class UserInfo implements UserInterface{
             throw e;
         }
     }
+<<<<<<< HEAD
+=======
+    @Override
+>>>>>>> master
     public User createUser(String email, String pw, String fName, String lName) throws Exception{
         Connection conn = DataBaseConn.getConnection();
         String query = "INSERT INTO USER(fname, lname, email, password)"+
@@ -85,6 +101,10 @@ public class UserInfo implements UserInterface{
                 user.setEmail(email);
                 user.setfName(fName);
                 user.setlName(lName);
+<<<<<<< HEAD
+=======
+                user.setUserid((int)rs.getLong(1));
+>>>>>>> master
                 return user;
             }
             else{
@@ -95,4 +115,48 @@ public class UserInfo implements UserInterface{
             throw e;
         }
     }
+<<<<<<< HEAD
+=======
+    @Override
+    public User updateUserPassword(String pw, int userID) throws Exception {
+        Connection conn = DataBaseConn.getConnection();
+        String query = "UPDATE USER"+
+                " SET password = ?"+
+                " WHERE user_id = ?";
+        PreparedStatement ps = conn.prepareStatement(query);
+        try{
+            ps.setString(1, PasswordHash.createHash(pw));
+            ps.setInt(2, userID);
+            ps.executeUpdate();
+            return null;
+        }
+        catch(Exception e){
+            throw e;
+        }
+    }
+
+    @Override
+    public User updateProfileInfo(int userID, String fName, String lName) throws Exception {
+        Connection conn = DataBaseConn.getConnection();
+        String query = "UPDATE USER"+
+                " SET fname = ?,"+
+                " lname = ?,"+
+                " WHERE user_id = ?";
+        PreparedStatement ps = conn.prepareStatement(query);
+        try{
+            ps.setString(1, fName);
+            ps.setString(2, lName);
+            ps.setInt(3, userID);
+            ps.executeUpdate();
+            User user = new User();
+            user.setUserid(userID);
+            user.setfName(fName);
+            user.setlName(lName);
+            return user;
+        }
+        catch(Exception e){
+            throw e;
+        }
+    }
+>>>>>>> master
 }
