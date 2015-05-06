@@ -5,6 +5,7 @@
 --%>
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@tag description="Wrapper for logged in pages" pageEncoding="UTF-8"%>
 <%@attribute name="title"%>
 <html>
@@ -24,6 +25,8 @@
           <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
+        <c:set var="url">${pageContext.request.requestURL}</c:set>
+        <base href="${fn:substring(url, 0, fn:length(url) - fn:length(pageContext.request.requestURI))}${pageContext.request.contextPath}/" />
     </head>
         
     <body>
@@ -40,19 +43,19 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class='nav navbar-nav'>
-                        <li <c:if test="${title}.equals(\"User Profile\")">class ='active'</c:if>>
-                                <a href="userProfile.jsp"> User Profile 
-                                <c:if test="${title}.equals(\"User Profile\")"><span class="sr-only">(current)</span></c:if>
+                        <li <c:if test="${title == 'User Profile'}">class ='active'</c:if>>
+                                <a href="user_profile"> User Profile 
+                                <c:if test="${title == 'User Profile'}"><span class="sr-only">(current)</span></c:if>
                                 </a>
                             </li>
-                            <li <c:if test="${title}.equals(\"Letters Requested\")">class ='active'</c:if>>
-                                <a href="#"/>View Letters Requested 
-                            <c:if test="${title}.equals(\"Letters Requested\")"><span class="sr-only">(current)</span></c:if>
+                            <li <c:if test="${title == 'Letters Requested'}">class ='active'</c:if>>
+                                <a href="letters_requested"/>View Letters Requested 
+                            <c:if test="${title == 'Letters Requested'}"><span class="sr-only">(current)</span></c:if>
                                 </a>
                             </li>
-                            <li <c:if test="${title}.equals(\"Letters Received\")">class ='active'</c:if>>
+                            <li <c:if test="${title == 'Requests Received'}">class ='active'</c:if>>
                                 <a href="#"> View Letters Received 
-                                <c:if test="${title}.equals(\"Letters Received\")"><span class="sr-only">(current)</span></c:if>
+                                <c:if test="${title == 'Requests Received'}"><span class="sr-only">(current)</span></c:if>
                                 </a>
                             </li>
                         </ul>
@@ -64,6 +67,11 @@
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
             <!-- Include all compiled plugins (below), or include individual files as needed -->
             <script src="js/bootstrap.min.js"></script>
-        <jsp:doBody/>
+                
+            <div class ='jumbotron' style="padding-top: 0; padding-bottom: 0">
+                <div class="container" style="background-color:rgba(0,0,0,.6); height: 100%">
+                    <jsp:doBody/>
+                </div>
+            </div>
     </body>
 </html>

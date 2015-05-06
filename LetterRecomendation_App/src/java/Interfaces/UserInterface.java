@@ -4,7 +4,7 @@
  */
 package Interfaces;
 
-import JavaBeans.*;
+import JavaBeans.User;
 
 /**
  *
