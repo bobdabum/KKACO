@@ -39,5 +39,5 @@ public class LoginFilter implements Filter{
     }
 
     @Override
-    public void destroy() {}    
+    public void destroy() {}  //Have a thing so that when you log out, it will point out.  
 }

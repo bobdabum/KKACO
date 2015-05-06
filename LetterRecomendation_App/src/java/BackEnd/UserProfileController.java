@@ -39,7 +39,7 @@ public class UserProfileController extends HttpServlet {
                         request.getParameter("lName"));
             }
             if(user!=null){
-                HttpSession session = request.getSession(true);
+                HttpSession session = request.getSession(true); //Creates an object http session
                 session.setAttribute("userid", user.getUserid());
                 request.setAttribute("user", user);
                 this.getServletContext().getRequestDispatcher("/WEB-INF/userProfile.jsp")
@@ -62,8 +62,8 @@ public class UserProfileController extends HttpServlet {
             int userID = (Integer) request.getSession(false).getAttribute("userid");
             User user = userInt.findUserByID(userID);
             request.setAttribute("user", user);
-            this.getServletContext().getRequestDispatcher("/WEB-INF/userProfile.jsp")
-                    .forward(request, response);
+           // this.getServletContext().getRequestDispatcher("/WEB-INF/lettersRequested.jsp")
+                //    .forward(request, response);
         }
         catch(Exception e){
             PrintWriter out = response.getWriter();

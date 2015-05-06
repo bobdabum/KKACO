@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author My Pc
  */
-@WebServlet(name = "FrontPageController", urlPatterns = {"/home", "/about", "/register"})
+@WebServlet(name = "FrontPageController", urlPatterns = {"/home", "/about", "/register"}) 
 public class FrontPageController extends HttpServlet {
     
     /**
