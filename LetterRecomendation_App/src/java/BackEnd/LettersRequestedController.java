@@ -8,10 +8,13 @@ package BackEnd;
 import Enums.Params;
 import DataAccessLayer.*;
 import Interfaces.*;
+import JavaBeans.Letter;
+import JavaBeans.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.servlet.ServletException;
@@ -29,7 +32,12 @@ public class LettersRequestedController extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try{
+            LetterInterface letterInt = new LetterInfo();
             int userID = (Integer) request.getSession().getAttribute(Params.USER_ID);
+            ArrayList<Letter> letters = letterInt.findUserLetterRequested(userID);
+            request.setAttribute("letters", letters);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/lettersRequested.jsp")
+                    .forward(request, response);
         }
         catch(Exception e){
             
