@@ -18,7 +18,7 @@ import javax.servlet.http.*;
  *
  * @author My Pc
  */
-@WebServlet(name = "UserProfileController", urlPatterns = {"/user_profile"})
+@WebServlet(name = "UserProfileController", urlPatterns = {Params.URLPATTERN_USERPROFILE})
 public class UserProfileController extends HttpServlet {
     
     @Override
@@ -28,21 +28,21 @@ public class UserProfileController extends HttpServlet {
             UserInterface userInt = new UserInfo();
             User user = null;
             
-            if(action.equals("login")){
+            if(action.equals(Params.LOGIN)){
                 user = userInt.findUserByPW(request.getParameter(Params.EMAIL),
                         request.getParameter(Params.PASSWORD));
             }
-            else if(action.equals("register")){
-                user = userInt.createUser(request.getParameter("email"),
-                        request.getParameter("pw"),
-                        request.getParameter("fName"),
-                        request.getParameter("lName"));
+            else if(action.equals(Params.REGISTER)){
+                user = userInt.createUser(request.getParameter(Params.EMAIL),
+                        request.getParameter(Params.PASSWORD),
+                        request.getParameter(Params.FNAME),
+                        request.getParameter(Params.LNAME));
             }
             if(user!=null){
                 HttpSession session = request.getSession(true); //Creates an object http session
-                session.setAttribute("userid", user.getUserid());
-                request.setAttribute("user", user);
-                this.getServletContext().getRequestDispatcher("/WEB-INF/userProfile.jsp")
+                session.setAttribute(Params.USER_ID, user.getUserid());
+                request.setAttribute(Params.USER, user);
+                this.getServletContext().getRequestDispatcher(Params.URL_USERPROFILE)
                         .forward(request, response);
             }
             else
@@ -59,11 +59,11 @@ public class UserProfileController extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         try{
             UserInterface userInt = new UserInfo();
-            int userID = (Integer) request.getSession(false).getAttribute("userid");
+            int userID = (Integer) request.getSession(false).getAttribute(Params.USER_ID);
             User user = userInt.findUserByID(userID);
-            request.setAttribute("user", user);
-           // this.getServletContext().getRequestDispatcher("/WEB-INF/lettersRequested.jsp")
-                //    .forward(request, response);
+            request.setAttribute(Params.USER, user);
+            this.getServletContext().getRequestDispatcher(Params.URL_USERPROFILE)
+                    .forward(request, response);
         }
         catch(Exception e){
             PrintWriter out = response.getWriter();

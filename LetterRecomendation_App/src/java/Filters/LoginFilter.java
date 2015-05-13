@@ -4,6 +4,7 @@
  */
 package Filters;
 
+import Enums.Params;
 import java.io.IOException;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -13,7 +14,8 @@ import javax.servlet.http.*;
  *
  * @author My Pc
  */
-@WebFilter(servletNames ="UserProfileController,LettersRequestedController")
+@WebFilter(filterName = "authFilter",
+            urlPatterns = {Params.URLPATTERN_USERPROFILE})
 public class LoginFilter implements Filter{
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {}
@@ -26,7 +28,7 @@ public class LoginFilter implements Filter{
         HttpSession session = req.getSession(false);
 
         // if session doesn't exist or if timed out, forward user to welcome page
-        if (session == null) {
+        if (session == null && req.getMethod().equalsIgnoreCase("GET")) {
             try {
                 req.getRequestDispatcher("/index.jsp").forward(request, response);
             } catch (Exception ex) {

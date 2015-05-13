@@ -6,12 +6,9 @@
 package BackEnd;
 
 import DataAccessLayer.LetterInfo;
-import DataAccessLayer.UserInfo;
 import Enums.Params;
 import Interfaces.LetterInterface;
-import Interfaces.UserInterface;
 import JavaBeans.Letter;
-import JavaBeans.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -26,39 +23,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Hien
  */
-@WebServlet(name = "RequestsReceivedController", urlPatterns = {"/RequestsReceivedController"})
+@WebServlet(name = "RequestsReceivedController", urlPatterns = {Params.URLPATTERN_REQUESTSRECEIVED})
 public class RequestsReceivedController extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RequestsReceivedController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet RequestsReceivedController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {
-            out.close();
-        }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -71,11 +37,11 @@ public class RequestsReceivedController extends HttpServlet {
        public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         try{
             LetterInterface letterInt = new LetterInfo();
-            int letterID = (Integer) request.getSession(false).getAttribute("letterid");
-            ArrayList<Letter> letter = letterInt.findUserLetterRequested(letterID);
-            request.setAttribute("letter", letter);
-          //  this.getServletContext().getRequestDispatcher("/WEB-INF/userProfile.jsp")
-          //          .forward(request, response);
+            int userID = (Integer) request.getSession(false).getAttribute(Params.USER_ID);
+            ArrayList<Letter> letter = letterInt.findRequestsReceived(userID);
+            request.setAttribute(Params.LETTERS, letter);
+            this.getServletContext().getRequestDispatcher(Params.URL_REQUESTSRECEIVED)
+                    .forward(request, response);
         }
         catch(Exception e){
             PrintWriter out = response.getWriter();
@@ -98,28 +64,28 @@ public class RequestsReceivedController extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try {
             String action = request.getParameter(Params.ACTION);
-            LetterInterface letterInt = new LetterInfo();// UserInterface userInt = new UserInfo();
+            LetterInterface letterInt = new LetterInfo();
             Letter letter = null;
             
             if(action.equals("acceptReject")){
                 //need to add 0 and 1 condition  
-                letter = letterInt.acceptLetter(Boolean.valueOf(request.getParameter("accepted")),
-                        Integer.parseInt(request.getParameter("letterID")),
-                        Integer.parseInt(request.getParameter("userID")));
+                letterInt.acceptLetter(Boolean.valueOf(request.getParameter(Params.ACCEPTED)),
+                        Integer.parseInt(request.getParameter(Params.LETTERID)),
+                        (Integer)request.getSession(false).getAttribute(Params.USER_ID));
             }
-            else if(action.equals("submitText")){
-                letter = letterInt.submitLetterText(Integer.parseInt(request.getParameter("letterID")),
-                        request.getParameter("text"));
+            else if(action.equals(Params.SUBMITTEXT)){
+                letterInt.submitLetterText(Integer.parseInt(request.getParameter(Params.LETTERID)),
+                        request.getParameter(Params.TEXT));
             }
-            else if(action.equals("submitFile")){
-                 letter = letterInt.submitLetterFile(Integer.parseInt(request.getParameter("letterID")),
-                          request.getParameter("URL"));
+            else if(action.equals(Params.SUBMITFILE)){
+                 letterInt.submitLetterFile(Integer.parseInt(request.getParameter(Params.LETTERID)),
+                          request.getParameter(Params.URL));
             }
             //Below this is not edited
             if(letter != null){
                 HttpSession session = request.getSession(true); //Creates an object http session
-                session.setAttribute("letterid", letter.getLetter_id());
-                request.setAttribute("letter", letter);
+                session.setAttribute(Params.LETTERID, letter.getLetter_id());
+                request.setAttribute(Params.LETTERS, letter);
                 this.getServletContext().getRequestDispatcher("/WEB-INF/userProfile.jsp")
                         .forward(request, response);
             }

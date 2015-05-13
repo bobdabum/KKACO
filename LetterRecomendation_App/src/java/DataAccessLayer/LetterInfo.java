@@ -18,7 +18,7 @@ import java.util.GregorianCalendar;
  */
 public class LetterInfo implements LetterInterface{
     @Override
-    public ArrayList<Letter> findUserLetterReceived(int userID) throws Exception {
+    public ArrayList<Letter> findRequestsReceived(int userID) throws Exception {
         Connection conn = DataBaseConn.getConnection();
         String query = "SELECT writer.fname, writer.lname, recomendee_id, letter_id,"+
                 " rec.fname, rec.lname, deadline, validto, requestdate, status, type"+
@@ -63,7 +63,7 @@ public class LetterInfo implements LetterInterface{
     }
     
     @Override
-    public ArrayList<Letter> findUserLetterRequested(int userID) throws Exception {
+    public ArrayList<Letter> findLettersRequested(int userID) throws Exception {
         Connection conn = DataBaseConn.getConnection();
         String query = "SELECT writer.fname, writer.lname, recomendee_id, letter_id,"+
                 " rec.fname, rec.lname, deadline, validto, requestdate, status, type"+
@@ -107,7 +107,7 @@ public class LetterInfo implements LetterInterface{
     }
     
     @Override
-    public Letter acceptLetter(boolean accepted, int letterID, int userID) throws Exception {
+    public void acceptLetter(boolean accepted, int letterID, int userID) throws Exception {
         Connection conn = DataBaseConn.getConnection();
         String query = "UPDATE userletter "
                 + " SET status = ?"
@@ -117,7 +117,6 @@ public class LetterInfo implements LetterInterface{
             ps.setInt(2, userID);
             ps.setInt(1, (accepted)? 1:2);
             ps.execute();
-            return null; //Kim added. Didn't know what to return
         }
         catch(Exception e){
             throw e;
@@ -125,7 +124,7 @@ public class LetterInfo implements LetterInterface{
     }
     
     @Override
-    public Letter requestLetter(int writer_id, int recomendee_id, GregorianCalendar deadline, GregorianCalendar validto, boolean isPrivate) throws Exception {
+    public void requestLetter(int writer_id, int recomendee_id, GregorianCalendar deadline, GregorianCalendar validto, boolean isPrivate) throws Exception {
         Connection conn = DataBaseConn.getConnection();
         String query = "INSERT INTO userletter(writer_id, recomendee_id, deadline, validto, type)"+
                 " VALUES(?,?,?,?,?)";
@@ -136,7 +135,6 @@ public class LetterInfo implements LetterInterface{
             ps.setDate(3, new java.sql.Date(deadline.getTimeInMillis()));
             ps.setDate(4, new java.sql.Date(validto.getTimeInMillis()));
             ps.setInt(5, (isPrivate)? 1:0);
-            return null; //Kim added. Didn't know what to return.
         }
         catch(Exception e){
             throw e;
@@ -144,12 +142,12 @@ public class LetterInfo implements LetterInterface{
     }
     
     @Override
-    public Letter submitLetterText(int letterID, String text) throws Exception {
+    public void submitLetterText(int letterID, String text) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     @Override
-    public Letter submitLetterFile(int letterID, String url) throws Exception {
+    public void submitLetterFile(int letterID, String url) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
