@@ -1809,5 +1809,7 @@
 	$(function(){
 		datepickerPlugin.call($('[data-provide="datepicker-inline"]'));
 	});
+        
+
 
 }(window.jQuery));

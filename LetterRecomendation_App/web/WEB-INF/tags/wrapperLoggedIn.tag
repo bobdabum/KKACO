@@ -55,7 +55,7 @@
                                 </a>
                             </li>
                             <li <c:if test="${title == 'Requests Received'}">class ='active'</c:if>>
-                                <a href="requests_received"> View Requests Received 
+                                <a href="requests_received"> View Requests Received
                                 <c:if test="${title == 'Requests Received'}"><span class="sr-only">(current)</span></c:if>
                                 </a>
                             </li>
