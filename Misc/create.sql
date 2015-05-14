@@ -1,0 +1,97 @@
+DROP TABLE IF EXISTS donationitem, donationdate, donationroute, donationpicture, route, donoraddress, donorphone, itemtype, donation, donor;
+CREATE TABLE donor
+(
+donorid INT UNSIGNED AUTO_INCREMENT NOT NULL,
+fname VARCHAR(50) NOT NULL,
+lname VARCHAR(50) NOT NULL,
+email VARCHAR(255) NOT NULL UNIQUE,
+createdon TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+PRIMARY KEY(donorid)
+) ENGINE=INNODB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+CREATE INDEX donor_fname ON donor(fname);
+CREATE INDEX donor_lname ON donor(lname);
+CREATE INDEX donor_email ON donor(email);
+
+CREATE TABLE donoraddress
+(
+donorid INT UNSIGNED NOT NULL,
+address VARCHAR(255) NOT NULL,
+city VARCHAR(50) NOT NULL,
+state VARCHAR(2) NOT NULL,
+zip varchar(20),
+status INT DEFAULT 1,
+FOREIGN KEY (donorid) REFERENCES donor(donorid)
+) ENGINE=INNODB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+CREATE TABLE donorphone
+(
+donorid INT UNSIGNED NOT NULL,
+phone VARCHAR(20),
+type VARCHAR(1) DEFAULT "C",
+status INT DEFAULT 1,
+createdon TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+FOREIGN KEY (donorid) REFERENCES donor(donorid)
+) ENGINE=INNODB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+CREATE INDEX donorphone_phone ON donorphone(phone);
+
+CREATE TABLE donation
+(
+donorid INT UNSIGNED NOT NULL,
+donationid INT UNSIGNED AUTO_INCREMENT NOT NULL,
+dateentered TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+status INT DEFAULT 0,
+adminnotes VARCHAR(4000),
+PRIMARY KEY(donationid),
+FOREIGN KEY (donorid) REFERENCES donor(donorid)
+) ENGINE=INNODB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+CREATE TABLE donationdate
+(
+donationid INT UNSIGNED NOT NULL,
+pickupdate date NOT NULL,
+FOREIGN KEY (donationid) REFERENCES donation(donationid)
+) ENGINE=INNODB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+CREATE TABLE route
+(
+routeid INT UNSIGNED NOT NULL AUTO_INCREMENT,
+scheduledate date NOT NULL,
+datecreated TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+PRIMARY KEY(routeid)
+) ENGINE=INNODB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+CREATE TABLE donationroute
+(
+donationid INT UNSIGNED NOT NULL,
+routeid INT UNSIGNED NOT NULL,
+position INT UNSIGNED NOT NULL,
+FOREIGN KEY (donationid) REFERENCES donation(donationid),
+FOREIGN KEY (routeid) REFERENCES route(routeid)
+) ENGINE=INNODB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+CREATE TABLE itemtype
+(
+itemtypeid INT UNSIGNED NOT NULL,
+itemtype VARCHAR(4000),
+PRIMARY KEY(itemtypeid)
+)ENGINE=INNODB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+INSERT INTO itemtype VALUES (0,'couch');
+INSERT INTO itemtype VALUES (1,'table');
+
+CREATE TABLE donationitem
+(
+donationid INT UNSIGNED NOT NULL,
+itemtypeid INT UNSIGNED NOT NULL,
+itemcount INT UNSIGNED NOT NULL,
+description VARCHAR(4000),
+FOREIGN KEY (itemtypeid) REFERENCES itemtype(itemtypeid),
+FOREIGN KEY (donationid) REFERENCES donation(donationid)
+) ENGINE=INNODB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+CREATE TABLE donationpicture
+(
+donationid INT UNSIGNED NOT NULL,
+imageurl VARCHAR(500) NOT NULL,
+FOREIGN KEY (donationid) REFERENCES donation(donationid)
+) ENGINE=INNODB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;

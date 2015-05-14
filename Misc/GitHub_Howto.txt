@@ -1,0 +1,45 @@
+GitHub
+1. Create a branch first and then let people know that you're ready to update the new file.
+
+2. Use github shell
+
+Important commands : Check website under misc file.
+
+--------------------------
+You can see the control version history on your github account online.
+
+First you add to the staging ground, you commit, and then you push.
+
+---------------------------
+
+1. Make sure you're in the right folder on git shell
+Users\Hien\KKACO
+
+2. Look at git status to see if you're up to date or not
+
+3. Edit your file (If you go to the KKACO Folder under Reports)
+
+4. To update the file, git add -A
+
+5. git status to see your status
+
+6. git commit, let people know
+
+7. git push, and comment that you edited it specifically. First line will be the subject, the second line will be your comment
+
+8. And then do git push --set-upstream origin kim
+
+9. To update your repository, do git pull on the git shell
+
+
+
+Merge to master
+
+1. Change branches to go to the master
+2. Update your stuff git pull
+3. Go to the path of the file
+4. Merge your branch: git merge kim
+
+
+MAIN FOLDER THAT UPDATES:
+C:USERS\HIEN\KKACO [For Kim]
