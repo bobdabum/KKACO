@@ -38,10 +38,6 @@ public class UserProfileController extends HttpServlet {
                         request.getParameter(Params.FNAME),
                         request.getParameter(Params.LNAME));
             }
-            else if(action.equals("editFName")){
-                int userID = (Integer) request.getSession(false).getAttribute(Params.USER_ID);
-                user = userInt.updateProfileInfo(userID, "ASDF", "ASDF");
-            }
             if(user!=null){
                 HttpSession session = request.getSession(true); //Creates an object http session
                 session.setAttribute(Params.USER_ID, user.getUserid());
