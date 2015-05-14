@@ -13,26 +13,20 @@
         <p>You have no requests received.</p>
     </c:if>
     
-    <!--Put wrapper/div around form, using bootstrap -->
-    
-    
     <c:if test="${not empty letters}">
-        <c:forEach items="${letters}" var="letter" varStatus="loop">
-            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="heading${loop.index}}" style="color:black">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <c:forEach items="${letters}" var="letter" varStatus="loop">
+                    <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="heading${loop.index}" style="color:black">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="collapse${loop.index}" aria-expanded="false" aria-controls="collapse${loop.index}" style="color:black">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse${loop.index}" aria-expanded="false" aria-controls="collapse${loop.index}" style="color:black">
                                 ${letter.rec_fName}  ${letter.rec_lName}
                                  <%--<c:out value="${letter.rec_fName}" /> ${letter.rec.lName} --%>
                             </a>
                         </h4>
                     </div>
-                    <div id="collapse${loop.index}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading${loop.index}" style="color:black">
+                    <div id="collapse${loop.index}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading${loop.index}" style="color:black">
                         <div class="panel-body">
-                            <!-- Paste form here -->
-                            
-                            
                             <div class="panel-group">
                                 <label class="writer-id">
                                     Your ID: <input type="text" name="writer_id" style="color:black"> 
@@ -47,7 +41,6 @@
                                         <textarea rows="10" cols="100" style="color:black"> Enter recommendation here
                                         </textarea>
                                     </div>
-                                    
                                     <br />
                                     <br />
                                     <div class="form-group">
@@ -82,15 +75,10 @@
                                     <input class="btn btn-default" type="submit" value="Submit">
                                 </form> 
                             </div>
-                            
-                            
-                            
-                            
                         </div>
                     </div>
                 </div>
-            </div>
+            </c:forEach>
         </div>
-    </c:forEach>
 </c:if>
 </t:wrapperLoggedIn>

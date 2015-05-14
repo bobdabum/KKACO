@@ -14,11 +14,11 @@
     <c:if test="${empty letters}">
         <p>You have no letters requested.</p>
     </c:if>
-    
+
     <div class="panel panel-default">
         <!-- Default panel contents -->
         <div class="panel-heading">Letters Requested</div>
-        
+
         <!-- Table -->
         <table class="table table-hover" style="color:black">
             <tr>
@@ -26,36 +26,25 @@
                 <th> Status </th>
                 <th> Due Date </th>
             </tr>
-            
-            <tr>
-                <td> Professor X </td>
-                <td> Accepted </td>
-                <td> 05/30/2015 </td>
-            </tr>
-            <%--
             <c:forEach items="${letters}" var="letter">
-                <td> <c:out value="${fName}"> </c:out></td>
-                <td> <c:out value="${accepted}"> </c:out></td>
-                <td> <c:out valie="${deadline}"> </c:out> </td>
-</c:forEach> --%>
+                <tr>
+                    <td> ${letter.writer_fName} ${letter.writer_lName}</td>
+                    <td> ${letter.status} </td>
+                    <td> <fmt:formatDate type="both" dateStyle="full" value="${letter.deadline.itsGregorian.time}"></fmt:formatDate></td>
+                </tr>
+            </c:forEach>
         </table>
     </div>
-    
-    
-    
+
+    <h3>Request new letter:</h3>
     <div class ="container-fluid">
         <form action="letters_requested" method ="post" name="Request Letter Form" class="form-inline">
             <div class="form-group">
-                
+
             </div>
             <div class="form-group">
                 <input class="datepicker" id="lrDate" data-date-format="mm/dd/yyyy" name="deadline">
             </div>
         </form>
     </div>
-    <c:if test="${not empty letters}">
-        <c:forEach items="${letters}" var="letter">
-            <!-- Show all letters requested-->
-        </c:forEach>
-    </c:if>
 </t:wrapperLoggedIn>
