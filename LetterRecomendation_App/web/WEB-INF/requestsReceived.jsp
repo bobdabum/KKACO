@@ -22,7 +22,9 @@
                     <div class="panel-heading" role="tab" id="heading${loop.index}" style="color:black">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapse${loop.index}" aria-expanded="false" aria-controls="collapse${loop.index}" style="color:black">
-                                ${letter.rec_fName}  ${letter.rec_lName}
+                                ${letter.rec_fName}  ${letter.rec_lName}  &nbsp;&nbsp;&nbsp;&nbsp;
+                                <button type="button" class="btn btn-success">Accept</button>
+                                <button type="button" class="btn btn-danger">Reject</button>
                                  <%--<c:out value="${letter.rec_fName}" /> ${letter.rec.lName} --%>
                             </a>
                         </h4>
