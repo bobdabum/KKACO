@@ -124,17 +124,26 @@ public class LetterInfo implements LetterInterface{
     }
     
     @Override
-    public void requestLetter(int writer_id, int recomendee_id, GregorianCalendar deadline, GregorianCalendar validto, boolean isPrivate) throws Exception {
+    public void requestLetter(String email, int recomendee_id, GregorianCalendar deadline, GregorianCalendar validto, boolean isPrivate) throws Exception {
         Connection conn = DataBaseConn.getConnection();
+        String query1 = "SELECT user_id FROM user WHERE email =?";
         String query = "INSERT INTO userletter(writer_id, recomendee_id, deadline, validto, type)"+
                 " VALUES(?,?,?,?,?)";
         PreparedStatement ps = conn.prepareStatement(query);
+        PreparedStatement ps1 = conn.prepareStatement(query1);
         try{
+            ps1.setString(1, email);
+            ResultSet rs = ps1.executeQuery();
+            int writer_id = 0;
+            if(rs.next())
+                writer_id = rs.getInt(1);
+            
             ps.setInt(1, writer_id);
             ps.setInt(2, recomendee_id);
             ps.setDate(3, new java.sql.Date(deadline.getTimeInMillis()));
             ps.setDate(4, new java.sql.Date(validto.getTimeInMillis()));
             ps.setInt(5, (isPrivate)? 1:0);
+            ps.executeUpdate();
         }
         catch(Exception e){
             throw e;

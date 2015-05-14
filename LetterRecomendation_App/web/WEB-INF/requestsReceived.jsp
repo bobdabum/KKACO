@@ -8,6 +8,8 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <t:wrapperLoggedIn title="Requests Received">
+    <script  src="js/bootstrap-datepicker.js"></script>
+    <script  src="js/LetterRequestedJS.js"></script>
     <h1>Requests Received</h1>
     <c:if test="${empty letters}">
         <p>You have no requests received.</p>
@@ -65,7 +67,7 @@
                                     <div class="form-group">
                                         Valid until: 
                                         <div class="input-group date">
-                                            <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                                            <input type="text" class="form-control" id="lrDate"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
                                         </div>
                                     </div>
                                     

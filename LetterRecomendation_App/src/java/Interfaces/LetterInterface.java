@@ -37,7 +37,7 @@ public interface LetterInterface {
      * @throws Exception 
      */
     public void acceptLetter(boolean accepted, int letterID, int userID) throws Exception;
-    public void requestLetter(int writer_id, int recomendee_id, GregorianCalendar deadline, GregorianCalendar validto, boolean isPrivate) throws Exception;
+    public void requestLetter(String email, int recomendee_id, GregorianCalendar deadline, GregorianCalendar validto, boolean isPrivate) throws Exception;
     public void submitLetterText(int letterID, String text) throws Exception;
     public void submitLetterFile(int letterID, String url) throws Exception;
     public String[] getLetter(int letterID) throws Exception;

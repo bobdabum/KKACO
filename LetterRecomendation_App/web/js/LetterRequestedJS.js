@@ -3,5 +3,5 @@
  * and open the template in the editor.
  */
 $(document).ready(function(){
-$('#lrDate').datepicker({});
+$('.datepicker').datepicker({});
 });

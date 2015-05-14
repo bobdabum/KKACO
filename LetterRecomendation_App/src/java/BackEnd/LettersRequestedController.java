@@ -43,8 +43,10 @@ public class LettersRequestedController extends HttpServlet {
             let2.setStatus(2);
             
             Letter let3 = new Letter();
-            let3.setRec_fName("Lauren");
+            let3.setWriter_fName("Lauren");
             let3.setStatus(3);
+            GregorianCalendar now = new GregorianCalendar();
+            let3.setDeadline(now);
             
             ArrayList<Letter> letters = new ArrayList<Letter>();
             letters.add(let1);
@@ -72,12 +74,13 @@ public class LettersRequestedController extends HttpServlet {
             GregorianCalendar validTo = new GregorianCalendar();
             validTo.setTime(df.parse(request.getParameter(Params.VALIDTO)));
 
-            letterInt.requestLetter(Integer.parseInt(request.getParameter(Params.WRITERID)),
-                    Integer.parseInt(request.getParameter(Params.RECOMENDEEID)),
+            letterInt.requestLetter(request.getParameter(Params.EMAIL),
+                    (Integer) request.getSession().getAttribute(Params.USER_ID),
                     cal,
                     validTo,
                     Boolean.valueOf(request.getParameter(Params.ISPRIVATE)));
 
+            doGet(request, response);
         } catch (Exception e) {
             PrintWriter out = response.getWriter();
             out.println("Error! " + e.getMessage());
