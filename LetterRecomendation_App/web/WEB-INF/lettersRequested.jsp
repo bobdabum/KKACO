@@ -14,13 +14,13 @@
     <c:if test="${empty letters}">
         <p>You have no letters requested.</p>
     </c:if>
-
+    
     <div class="panel panel-default">
         <!-- Default panel contents -->
         <div class="panel-heading">Letters Requested</div>
-
+        
         <!-- Table -->
-        <table class="table">
+        <table class="table table-hover" style="color:black">
             <tr>
                 <th> Requested From </th>
                 <th> Status </th>
@@ -32,6 +32,12 @@
                 <td> Accepted </td>
                 <td> 05/30/2015 </td>
             </tr>
+            <%--
+            <c:forEach items="${letters}" var="letter">
+                <td> <c:out value="${fName}"> </c:out></td>
+                <td> <c:out value="${accepted}"> </c:out></td>
+                <td> <c:out valie="${deadline}"> </c:out> </td>
+</c:forEach> --%>
         </table>
     </div>
     
