@@ -49,6 +49,11 @@
                                 <c:if test="${title == 'User Profile'}"><span class="sr-only">(current)</span></c:if>
                                 </a>
                             </li>
+                             <li <c:if test="${title == 'Edit Profile'}">class ='active'</c:if>>
+                                <a href="edit_Profile">Edit Profile 
+                            <c:if test="${title == 'Edit Profile'}"><span class="sr-only">(current)</span></c:if>
+                                </a>
+                            </li>
                             <li <c:if test="${title == 'Letters Requested'}">class ='active'</c:if>>
                                 <a href="letters_requested">View Letters Requested 
                             <c:if test="${title == 'Letters Requested'}"><span class="sr-only">(current)</span></c:if>
