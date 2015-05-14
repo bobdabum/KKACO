@@ -38,8 +38,26 @@ public class RequestsReceivedController extends HttpServlet {
         try{
             LetterInterface letterInt = new LetterInfo();
             int userID = (Integer) request.getSession(false).getAttribute(Params.USER_ID);
-            ArrayList<Letter> letter = letterInt.findRequestsReceived(userID);
-            request.setAttribute(Params.LETTERS, letter);
+           // ArrayList<Letter> letter = letterInt.findRequestsReceived(userID);
+            Letter let1 = new Letter(); 
+            let1.setRec_fName("Kim");
+            let1.setRec_lName("Araracap");
+            
+            Letter let2 = new Letter();
+            let2.setRec_fName("Ralph");
+            let2.setRec_lName("Lauren");
+            
+            Letter let3 = new Letter();
+            let3.setRec_fName("Lauren");
+            
+            ArrayList<Letter> letters = new ArrayList<Letter>();
+            letters.add(let1);
+            letters.add(let2);
+            letters.add(let3);
+                    
+            
+            
+            request.setAttribute(Params.LETTERS, letters);
             this.getServletContext().getRequestDispatcher(Params.URL_REQUESTSRECEIVED)
                     .forward(request, response);
         }

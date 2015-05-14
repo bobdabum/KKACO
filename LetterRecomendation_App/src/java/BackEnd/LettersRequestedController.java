@@ -29,7 +29,7 @@ public class LettersRequestedController extends HttpServlet {
         try{
             LetterInterface letterInt = new LetterInfo();
             int userID = (Integer) request.getSession().getAttribute(Params.USER_ID);
-            ArrayList<Letter> letters = letterInt.findLettersRequested(userID);
+           ArrayList<Letter> letters = letterInt.findLettersRequested(userID);
             request.setAttribute(Params.LETTERS, letters);
             this.getServletContext().getRequestDispatcher(Params.URL_LETTERSREQUESTED)
                     .forward(request, response);
