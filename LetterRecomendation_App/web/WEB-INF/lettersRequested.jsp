@@ -8,7 +8,7 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <t:wrapperLoggedIn title="Letters Requested">
-    <script  src="js/bootstrap-datepicker.min.js"></script>
+    <script  src="js/bootstrap-datepicker.js"></script>
     <script  src="js/LetterRequestedJS.js"></script>
     <h1>Letters Requested</h1>
     <c:if test="${empty letters}">
