@@ -25,6 +25,7 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "RequestsReceivedController", urlPatterns = {Params.URLPATTERN_REQUESTSRECEIVED})
 public class RequestsReceivedController extends HttpServlet {
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -34,39 +35,20 @@ public class RequestsReceivedController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-       public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        try{
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
             LetterInterface letterInt = new LetterInfo();
             int userID = (Integer) request.getSession(false).getAttribute(Params.USER_ID);
-           // ArrayList<Letter> letter = letterInt.findRequestsReceived(userID);
-            Letter let1 = new Letter(); 
-            let1.setRec_fName("Kim");
-            let1.setRec_lName("Araracap");
-            
-            Letter let2 = new Letter();
-            let2.setRec_fName("Ralph");
-            let2.setRec_lName("Lauren");
-            
-            Letter let3 = new Letter();
-            let3.setRec_fName("Lauren");
-            
-            ArrayList<Letter> letters = new ArrayList<Letter>();
-            letters.add(let1);
-            letters.add(let2);
-            letters.add(let3);
-                    
-            
-            
+            ArrayList<Letter> letters = letterInt.findRequestsReceived(userID);
             request.setAttribute(Params.LETTERS, letters);
             this.getServletContext().getRequestDispatcher(Params.URL_REQUESTSRECEIVED)
                     .forward(request, response);
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             PrintWriter out = response.getWriter();
             out.println("<script type=\"text/javascript\">");
             out.println("alert('" + e.getMessage() + "');");
             out.println("location='index.jsp';");
-            out.println("</script>");            
+            out.println("</script>");
         }
     }
 
@@ -84,31 +66,23 @@ public class RequestsReceivedController extends HttpServlet {
             String action = request.getParameter(Params.ACTION);
             LetterInterface letterInt = new LetterInfo();
             Letter letter = null;
-            
-            if(action.equals("acceptReject")){
+
+            if (action.equals("acceptReject")) {
                 //need to add 0 and 1 condition  
                 letterInt.acceptLetter(Boolean.valueOf(request.getParameter(Params.ACCEPTED)),
                         Integer.parseInt(request.getParameter(Params.LETTERID)),
-                        (Integer)request.getSession(false).getAttribute(Params.USER_ID));
-            }
-            else if(action.equals(Params.SUBMITTEXT)){
+                        (Integer) request.getSession(false).getAttribute(Params.USER_ID),
+                        Integer.parseInt(request.getParameter(Params.RECOMENDEEID)));
+            } else if (action.equals(Params.SUBMITTEXT)) {
                 letterInt.submitLetterText(Integer.parseInt(request.getParameter(Params.LETTERID)),
                         request.getParameter(Params.TEXT));
+            } else if (action.equals(Params.SUBMITFILE)) {
+                letterInt.submitLetterFile(Integer.parseInt(request.getParameter(Params.LETTERID)),
+                        request.getParameter(Params.URL));
             }
-            else if(action.equals(Params.SUBMITFILE)){
-                 letterInt.submitLetterFile(Integer.parseInt(request.getParameter(Params.LETTERID)),
-                          request.getParameter(Params.URL));
-            }
-            //Below this is not edited
-            if(letter != null){
-                HttpSession session = request.getSession(true); //Creates an object http session
-                session.setAttribute(Params.LETTERID, letter.getLetter_id());
-                request.setAttribute(Params.LETTERS, letter);
-                this.getServletContext().getRequestDispatcher("/WEB-INF/userProfile.jsp")
-                        .forward(request, response);
-            }
-            else
-                throw new Exception("Can't find letter");
+
+            this.getServletContext().getRequestDispatcher(Params.URL_REQUESTSRECEIVED)
+                    .forward(request, response);
         } catch (Exception e) {
             PrintWriter out = response.getWriter();
             out.println("<script type=\"text/javascript\">");

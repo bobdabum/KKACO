@@ -107,14 +107,16 @@ public class LetterInfo implements LetterInterface{
     }
     
     @Override
-    public void acceptLetter(boolean accepted, int letterID, int userID) throws Exception {
+    public void acceptLetter(boolean accepted, int letterID, int userID, int rec_id) throws Exception {
         Connection conn = DataBaseConn.getConnection();
         String query = "UPDATE userletter "
                 + " SET status = ?"
-                + " WHERE writer_id = ?";
+                + " WHERE writer_id = ?"
+                + " AND recomendee_id=?";
         PreparedStatement ps = conn.prepareStatement(query);
         try{
             ps.setInt(2, userID);
+            ps.setInt(3, rec_id);
             ps.setInt(1, (accepted)? 1:2);
             ps.execute();
         }
