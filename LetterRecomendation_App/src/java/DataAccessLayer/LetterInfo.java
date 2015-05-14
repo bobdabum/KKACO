@@ -111,12 +111,10 @@ public class LetterInfo implements LetterInterface{
         Connection conn = DataBaseConn.getConnection();
         String query = "UPDATE userletter "
                 + " SET status = ?"
-                + " WHERE writer_id = ?"
-                + " AND recomendee_id=?";
+                + " WHERE letter_id = ?";
         PreparedStatement ps = conn.prepareStatement(query);
         try{
-            ps.setInt(2, userID);
-            ps.setInt(3, rec_id);
+            ps.setInt(2, letterID);
             ps.setInt(1, (accepted)? 1:2);
             ps.execute();
         }
@@ -154,12 +152,18 @@ public class LetterInfo implements LetterInterface{
     
     @Override
     public void submitLetterText(int letterID, String text) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection conn = DataBaseConn.getConnection();
+        String query = "UPDATE userletter SET text=? WHERE letter_id = ?";
+        PreparedStatement ps = conn.prepareStatement(query);
+        ps.setInt(1, letterID);
+        ps.setString(2, text);
+        ps.executeUpdate();
     }
     
     @Override
     public void submitLetterFile(int letterID, String url) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
     }
     
     @Override
