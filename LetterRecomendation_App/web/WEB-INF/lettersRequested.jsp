@@ -16,26 +16,28 @@
         <p>You have no letters requested.</p>
     </c:if>
 
-    <div class="panel panel-default">
-        <!-- Default panel contents -->
-        <div class="panel-heading">Letters Requested</div>
+    <c:if test="${not empty letters}">
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">Letters Requested</div>
 
-        <!-- Table -->
-        <table class="table table-hover" style="color:black">
-            <tr>
-                <th> Requested From </th>
-                <th> Status </th>
-                <th> Due Date </th>
-            </tr>
-            <c:forEach items="${letters}" var="letter">
+            <!-- Table -->
+            <table class="table table-hover" style="color:black">
                 <tr>
-                    <td> ${letter.writer_fName} ${letter.writer_lName}</td>
-                    <td> ${letter.status} </td>
-                    <td> <fmt:formatDate value="${letter.deadline.time}" type="date" dateStyle="SHORT"/> </td>
+                    <th> Requested From </th>
+                    <th> Status </th>
+                    <th> Due Date </th>
                 </tr>
-            </c:forEach>
-        </table>
-    </div>
+                <c:forEach items="${letters}" var="letter">
+                    <tr>
+                        <td> ${letter.writer_fName} ${letter.writer_lName}</td>
+                        <td> ${letter.status} </td>
+                        <td> <fmt:formatDate value="${letter.deadline.time}" type="date" dateStyle="SHORT"/> </td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
+    </c:if>
 
     <h3>Request new letter:</h3>
     <div class ="container-fluid panel-group">

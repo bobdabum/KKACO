@@ -30,29 +30,7 @@ public class LettersRequestedController extends HttpServlet {
         try {
             LetterInterface letterInt = new LetterInfo();
             int userID = (Integer) request.getSession().getAttribute(Params.USER_ID);
-            //ArrayList<Letter> letters = letterInt.findLettersRequested(userID);
-            
-            Letter let1 = new Letter(); 
-            let1.setWriter_fName("Kim");
-            let1.setWriter_lName("Araracap");
-            let1.setStatus(0);
-            
-            Letter let2 = new Letter();
-            let2.setWriter_fName("Ralph");
-            let2.setWriter_lName("Lauren");
-            let2.setStatus(2);
-            
-            Letter let3 = new Letter();
-            let3.setWriter_fName("Lauren");
-            let3.setStatus(3);
-            GregorianCalendar now = new GregorianCalendar();
-            let3.setDeadline(now);
-            
-            ArrayList<Letter> letters = new ArrayList<Letter>();
-            letters.add(let1);
-            letters.add(let2);
-            letters.add(let3);
-            
+            ArrayList<Letter> letters = letterInt.findLettersRequested(userID);
             request.setAttribute(Params.LETTERS, letters);
             this.getServletContext().getRequestDispatcher(Params.URL_LETTERSREQUESTED)
                     .forward(request, response);
