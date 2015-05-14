@@ -41,6 +41,8 @@ public class Params{
     //URL Parameters
     public static final String URLPATTERN_USERPROFILE = "/user_profile";
     public static final String URL_USERPROFILE = "/WEB-INF/userProfile.jsp";
+    public static final String URLPATTERN_EDITPROFILE = "/edit_Profile";
+    public static final String URL_EDITPROFILE = "/WEB-INF/editProfile.jsp";
     public static final String URLPATTERN_LETTERSREQUESTED = "/letters_requested";
     public static final String URL_LETTERSREQUESTED = "/WEB-INF/lettersRequested.jsp";
     public static final String URLPATTERN_REQUESTSRECEIVED = "/requests_received";
